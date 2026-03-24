@@ -3,216 +3,292 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Evaluación - Pensamiento Crítico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación: Pensamiento Crítico y Aprendizaje Autónomo</title>
   <style>
     body {
-      font-family: Arial;
-      margin: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
     }
 
-    .question {
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    .case-card {
+      background: #ebf5fb;
+      border-left: 5px solid #3498db;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .question-block {
       margin-bottom: 30px;
       padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
     }
 
-    .options {
+    .options-container {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     .option {
-      padding: 10px;
-      border: 1px solid #333;
-      border-radius: 5px;
-      cursor: grab;
-      background: #f2f2f2;
+      background: #fff;
+      border: 2px solid #3498db;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: 0.3s;
+      font-size: 0.9em;
     }
 
-    .dropzone {
-      margin-top: 10px;
-      padding: 15px;
-      border: 2px dashed #aaa;
-      border-radius: 5px;
+    .option:hover {
+      background: #3498db;
+      color: white;
+    }
+
+    .option.selected {
+      background: #2c3e50;
+      color: white;
+      border-color: #2c3e50;
+    }
+
+    .drop-zone {
       min-height: 40px;
+      border: 2px dashed #bdc3c7;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      padding: 5px 15px;
+      border-radius: 8px;
+      background: #fafafa;
+      color: #7f8c8d;
+    }
+
+    .drop-zone.filled {
+      border-style: solid;
+      color: #2c3e50;
+      font-weight: bold;
+      background: #e8f8f5;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      padding: 10px;
+      display: none;
+      border-radius: 5px;
+      font-size: 0.9em;
     }
 
     .correct {
-      color: green;
+      background: #d4edda;
+      color: #155724;
     }
 
     .incorrect {
-      color: red;
+      background: #f8d7da;
+      color: #721c24;
     }
 
-    #result {
-      font-size: 20px;
-      font-weight: bold;
+    button#submit-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
       margin-top: 20px;
+    }
+
+    #result-area {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #2c3e50;
     }
   </style>
 </head>
 
 <body>
 
-  <h2>Evaluación: Pensamiento crítico y aprendizaje autónomo</h2>
+  <div class="container">
+    <h1>Evaluación de Pensamiento Crítico</h1>
+    <p><strong>Instrucciones:</strong> Selecciona una respuesta de la lista azul y luego haz clic en el recuadro gris de
+      la pregunta correspondiente.</p>
 
-  <div id="quiz"></div>
+    <div id="quiz"></div>
 
-  <button onclick="calificar()">Calificar</button>
-  <div id="result"></div>
+    <button id="submit-btn" onclick="gradeQuiz()">Finalizar y Calificar</button>
+    <div id="result-area"></div>
+  </div>
 
   <script>
-    const preguntas = [
+    const questions = [
       {
-        texto: "Un estudiante debe elegir entre varios recursos en línea para aprender sobre APIs...",
-        opciones: {
-          A: "Seleccionar el recurso más fácil.",
-          B: "Analizar fuentes y contrastar información.",
-          C: "Elegir el más reciente."
-        },
-        correcta: "B",
-        feedback: {
-          A: "No siempre lo más fácil es lo más confiable.",
-          B: "Correcto: implica análisis y validación de fuentes.",
-          C: "La actualidad no garantiza calidad."
-        }
+        id: 1,
+        case: "Un estudiante de programación encuentra tres tutoriales diferentes para implementar una base de datos. En lugar de seguir el primero, decide comparar la eficiencia y seguridad de cada método.",
+        question: "¿Qué componente cognitivo está aplicando principalmente?",
+        options: ["Evaluación de argumentos", "Inferencia", "Humildad epistémica", "Síntesis"],
+        correct: "Evaluación de argumentos",
+        feedback: "Correcto. Analizar la solidez y eficiencia de diferentes propuestas es parte de la evaluación de argumentos."
       },
       {
-        texto: "Un estudiante usa una solución sin comprenderla...",
-        opciones: {
-          A: "Aceptar la solución.",
-          B: "Analizar y comprender el código.",
-          C: "Reutilizar sin modificar."
-        },
-        correcta: "B",
-        feedback: {
-          A: "Cumplir no implica comprender.",
-          B: "Correcto: entender permite mejorar.",
-          C: "Reutilizar sin فهم limita el aprendizaje."
-        }
+        id: 2,
+        case: "Al leer un artículo técnico, un desarrollador nota que el autor trabaja para la empresa que vende la herramienta recomendada.",
+        question: "¿Qué habilidad pedagógica está activando al notar esto?",
+        options: ["Identificar sesgos implícitos", "Formular preguntas generativas", "Escritura reflexiva", "Análisis comparativo"],
+        correct: "Identificar sesgos implícitos",
+        feedback: "¡Muy bien! Reconocer intereses ocultos o prejuicios es fundamental para la neutralidad del pensamiento."
       },
       {
-        texto: "Recibe retroalimentación sobre eficiencia...",
-        opciones: {
-          A: "Mantener solución.",
-          B: "Evaluar mejoras.",
-          C: "Ignorar feedback."
-        },
-        correcta: "B",
-        feedback: {
-          A: "Cumplir mínimos no es óptimo.",
-          B: "Correcto: mejora continua.",
-          C: "Ignorar limita el aprendizaje."
-        }
+        id: 3,
+        case: "Un estudiante reconoce que no entiende cómo funciona un algoritmo de cifrado y decide buscar documentación base antes de intentar implementarlo.",
+        question: "¿Qué componente actitudinal demuestra?",
+        options: ["Humildad epistémica", "Escepticismo constructivo", "Responsabilidad intelectual", "Autoconciencia"],
+        correct: "Humildad epistémica",
+        feedback: "Exacto. Reconocer la propia ignorancia es el primer paso para un aprendizaje profundo."
       },
       {
-        texto: "Debate sobre framework...",
-        opciones: {
-          A: "Elegir popular.",
-          B: "Evaluar argumentos.",
-          C: "Mantener postura."
-        },
-        correcta: "B",
-        feedback: {
-          A: "Popularidad ≠ mejor opción.",
-          B: "Correcto: decisión basada en evidencia.",
-          C: "Ignorar otras ideas limita el análisis."
-        }
+        id: 4,
+        case: "Tras fallar en una entrega, un alumno analiza sus hábitos de estudio y decide cambiar su técnica de toma de notas.",
+        question: "¿Qué proceso metacognitivo está realizando?",
+        options: ["Autorregulación", "Monitoreo", "Síntesis", "Curiosidad intelectual"],
+        correct: "Autorregulación",
+        feedback: "Correcto. Ajustar las estrategias en función de los resultados es la esencia de la autorregulación."
       },
       {
-        texto: "Resolver problema con múltiples soluciones...",
-        opciones: {
-          A: "Elegir la más rápida.",
-          B: "Usar la conocida.",
-          C: "Comparar alternativas."
-        },
-        correcta: "C",
-        feedback: {
-          A: "Rapidez no siempre es calidad.",
-          B: "Limita el pensamiento crítico.",
-          C: "Correcto: análisis integral."
-        }
+        id: 5,
+        case: "Un programador revisa su propio código de hace seis meses y detecta errores de lógica que antes no veía.",
+        question: "Según Paul y Elder, esto es el arte de:",
+        options: ["Pensar sobre el propio pensamiento", "Acumular datos", "Escepticismo irracional", "Aprendizaje pasivo"],
+        correct: "Pensar sobre el propio pensamiento",
+        feedback: "Así es. La metacognición permite mejorar la calidad del pensamiento revisando procesos previos."
+      },
+      {
+        id: 6,
+        case: "Antes de usar una librería de código abierto, un estudiante investiga quién la mantiene y cuándo fue su última actualización.",
+        question: "Esta acción es un ejemplo de:",
+        options: ["Evaluar recursos de aprendizaje", "Identificar tesis", "Pensamiento superficial", "Inferencia"],
+        correct: "Evaluar recursos de aprendizaje",
+        feedback: "Correcto. En el aprendizaje autónomo, filtrar la calidad de las fuentes es vital."
+      },
+      {
+        id: 7,
+        case: "Al enfrentar un error de sistema, el estudiante se pregunta: '¿Qué supuestos estoy dando por sentados en mi configuración?'",
+        question: "¿Qué estrategia está utilizando?",
+        options: ["Preguntas generativas", "Análisis de casos", "Lectura crítica", "Debate estructurado"],
+        correct: "Preguntas generativas",
+        feedback: "¡Excelente! Cuestionar los supuestos ayuda a profundizar en la resolución de problemas."
+      },
+      {
+        id: 8,
+        case: "Un estudiante integra conceptos de lógica matemática con estructuras de control en Python para crear un script original.",
+        question: "¿Qué componente cognitivo destaca aquí?",
+        options: ["Síntesis", "Comprensión", "Escepticismo", "Monitoreo"],
+        correct: "Síntesis",
+        feedback: "Correcto. La síntesis permite unir diversas fuentes o saberes para generar algo nuevo."
+      },
+      {
+        id: 9,
+        case: "Un alumno mantiene su postura crítica ante una nueva tecnología de moda, evaluándola con rigor pero sin rechazarla de entrada.",
+        question: "¿Cómo se define esta actitud?",
+        options: ["Escepticismo constructivo", "Humildad epistémica", "Responsabilidad intelectual", "Autoconciencia"],
+        correct: "Escepticismo constructivo",
+        feedback: "Exacto. Evaluar con rigor sin caer en el rechazo irracional es ser constructivo."
+      },
+      {
+        id: 10,
+        case: "Un estudiante decide aprender un nuevo lenguaje de programación por su cuenta, definiendo sus propios tiempos y metas.",
+        question: "El pensamiento crítico actúa aquí como:",
+        options: ["Pilar del aprendizaje autónomo", "Simple acumulación de datos", "Proceso no intencional", "Habilidad aislada"],
+        correct: "Pilar del aprendizaje autónomo",
+        feedback: "¡Correcto! Sin pensamiento crítico, la autonomía carece de dirección y evaluación."
       }
     ];
 
-    const quiz = document.getElementById("quiz");
+    let selectedOption = null;
 
-    preguntas.forEach((p, i) => {
-      const div = document.createElement("div");
-      div.className = "question";
-
-      div.innerHTML = `<p><b>Pregunta ${i + 1}:</b> ${p.texto}</p>`;
-
-      const optionsDiv = document.createElement("div");
-      optionsDiv.className = "options";
-
-      for (let key in p.opciones) {
-        const opt = document.createElement("div");
-        opt.className = "option";
-        opt.draggable = true;
-        opt.id = `q${i}_${key}`;
-        opt.innerText = key + ": " + p.opciones[key];
-
-        opt.addEventListener("dragstart", e => {
-          e.dataTransfer.setData("text", e.target.id);
-        });
-
-        optionsDiv.appendChild(opt);
-      }
-
-      const drop = document.createElement("div");
-      drop.className = "dropzone";
-      drop.id = `drop${i}`;
-      drop.innerText = "Arrastra tu respuesta aquí";
-
-      drop.addEventListener("dragover", e => e.preventDefault());
-
-      drop.addEventListener("drop", e => {
-        e.preventDefault();
-        const data = e.dataTransfer.getData("text");
-        const dragged = document.getElementById(data);
-        drop.innerHTML = "";
-        drop.appendChild(dragged);
+    function initQuiz() {
+      const quizContainer = document.getElementById('quiz');
+      questions.forEach((q, index) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+                <div class="case-card"><strong>Caso ${index + 1}:</strong> ${q.case}</div>
+                <p>${q.question}</p>
+                <div class="drop-zone" id="drop-${index}" onclick="placeOption(${index})">Haz clic aquí para soltar la respuesta</div>
+                <div class="options-container">
+                    ${q.options.map(opt => `<div class="option" onclick="selectOpt(this, '${opt}')">${opt}</div>`).join('')}
+                </div>
+                <div class="feedback" id="fb-${index}"></div>
+            `;
+        quizContainer.appendChild(block);
       });
+    }
 
-      const feedback = document.createElement("div");
-      feedback.id = `feedback${i}`;
+    function selectOpt(element, val) {
+      document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedOption = val;
+    }
 
-      div.appendChild(optionsDiv);
-      div.appendChild(drop);
-      div.appendChild(feedback);
+    function placeOption(qIndex) {
+      if (selectedOption) {
+        const zone = document.getElementById(`drop-${qIndex}`);
+        zone.innerText = selectedOption;
+        zone.classList.add('filled');
+        zone.setAttribute('data-answer', selectedOption);
+      }
+    }
 
-      quiz.appendChild(div);
-    });
+    function gradeQuiz() {
+      let score = 0;
+      questions.forEach((q, index) => {
+        const zone = document.getElementById(`drop-${index}`);
+        const fb = document.getElementById(`fb-${index}`);
+        const userAns = zone.getAttribute('data-answer');
 
-    function calificar() {
-      let correctas = 0;
-
-      preguntas.forEach((p, i) => {
-        const drop = document.getElementById(`drop${i}`);
-        const feedback = document.getElementById(`feedback${i}`);
-
-        if (drop.children.length > 0) {
-          const respuesta = drop.children[0].id.split("_")[1];
-
-          if (respuesta === p.correcta) {
-            correctas++;
-            feedback.innerHTML = `<p class="correct">✔ ${p.feedback[respuesta]}</p>`;
-          } else {
-            feedback.innerHTML = `<p class="incorrect">✘ ${p.feedback[respuesta]}</p>`;
-          }
+        fb.style.display = 'block';
+        if (userAns === q.correct) {
+          score++;
+          fb.innerText = q.feedback;
+          fb.className = 'feedback correct';
         } else {
-          feedback.innerHTML = `<p class="incorrect">✘ No respondida</p>`;
+          fb.innerText = "Incorrecto. La respuesta era: " + q.correct;
+          fb.className = 'feedback incorrect';
         }
       });
 
-      let porcentaje = (correctas / preguntas.length) * 100;
-      document.getElementById("result").innerText =
-        `Resultado final: ${porcentaje.toFixed(0)}% (${correctas}/${preguntas.length})`;
+      const finalPercent = (score / questions.length) * 100;
+      document.getElementById('result-area').innerText = `Tu calificación final es: ${finalPercent}% (${score} de 10)`;
+      window.scrollTo(0, document.body.scrollHeight);
     }
+
+    initQuiz();
   </script>
 
 </body>
