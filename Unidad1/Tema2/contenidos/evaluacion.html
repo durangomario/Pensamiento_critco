@@ -1,239 +1,552 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Examen: Metacognición y Autorregulación (10 preguntas)</title>
-<style>
-  :root{
-    --bg:#f3f4f6; --card:#ffffff; --ink:#1f2937; --muted:#4b5563;
-    --accent:#2563eb; --bad:#dc2626; --good:#059669; --warn:#d97706;
-  }
-  body{margin:0; background:var(--bg); font-family:system-ui; color:var(--ink);}
-  .wrap{max-width:920px; margin:24px auto; padding:24px;}
-  .hero{background:var(--card); border:1px solid #e5e7eb; padding:24px;
-    border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.05);}
-  h1{margin:0 0 6px; font-size:clamp(22px,3vw,28px);}
-  .sub{color:var(--muted); margin:0 0 12px; font-size:14px}
-  .badge{display:inline-block; background:var(--accent); color:white;
-    padding:4px 10px; border-radius:999px; font-size:12px;}
-  .quiz{margin-top:16px; display:grid; gap:16px;}
-  .q{background:#f9fafb; border:1px solid #e5e7eb; border-radius:14px; padding:18px;}
-  .q h3{margin:0 0 10px; font-size:18px;}
-  .opts{display:grid; gap:8px; margin-top:6px}
-  .opt{display:flex; gap:10px; align-items:flex-start; padding:10px 12px;
-    border-radius:10px; border:1px solid #e5e7eb; background:white; cursor:pointer;}
-  .opt:hover{border-color:var(--accent); background:#eff6ff}
-  .feedback{display:none; margin-top:10px; font-size:14px; line-height:1.4; padding:10px 12px; border-radius:10px;}
-  .feedback.ok{background:#dcfce7; border:1px solid #86efac; color:var(--good)}
-  .feedback.bad{background:#fee2e2; border:1px solid #fca5a5; color:var(--bad)}
-  .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
-  button{appearance:none; border:none; cursor:pointer; padding:12px 16px;
-    border-radius:12px; font-weight:600; background:var(--accent); color:white;}
-  button.secondary{background:#f3f4f6; color:var(--ink); border:1px solid #d1d5db;}
-  .score{margin-top:14px; font-weight:700; font-size:16px;}
-  .legend{margin-top:6px; color:var(--muted); font-size:13px;}
-  .required{color:var(--warn); font-weight:600}
-  .mark{display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700;}
-  .mark.ok{background:#dcfce7; color:var(--good)}
-  .mark.bad{background:#fee2e2; color:var(--bad)}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="hero">
-    <span class="badge">Evaluación</span>
-    <h1>Examen: Metacognición y Autorregulación</h1>
-    <p class="sub">Selecciona una opción por pregunta. Al calificar, verás retroalimentación con una breve explicación.</p>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluación: Estrategias para la reflexión continua</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-    <form id="quiz" class="quiz">
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
 
-<!-- P1 -->
-<div class="q" data-correct="b" data-explain="La metacognición es reflexionar sobre los propios procesos de pensamiento y aprendizaje.">
-  <h3>1) ¿Qué significa metacognición?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q1" value="a"> Memorizar sin razonar sobre lo aprendido.</label>
-    <label class="opt"><input type="radio" name="q1" value="b"> Reflexionar sobre cómo se piensa y aprende.</label>
-    <label class="opt"><input type="radio" name="q1" value="c"> Aplicar estrategias sin cuestionar resultados.</label>
-    <label class="opt"><input type="radio" name="q1" value="d"> Repetir ejercicios mecánicamente.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-<!-- P2 -->
-<div class="q" data-correct="c" data-explain="El conocimiento condicional implica saber cuándo y por qué aplicar una estrategia.">
-  <h3>2) ¿Cuál ejemplo corresponde al conocimiento condicional?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q2" value="a"> Reconocer mis fortalezas y debilidades.</label>
-    <label class="opt"><input type="radio" name="q2" value="b"> Conocer los pasos de un algoritmo.</label>
-    <label class="opt"><input type="radio" name="q2" value="c"> Decidir usar mapas conceptuales para un tema complejo.</label>
-    <label class="opt"><input type="radio" name="q2" value="d"> Memorizar fórmulas sin analizarlas.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
 
-<!-- P3 -->
-<div class="q" data-correct="a" data-explain="En la fase de planificación se definen metas y se seleccionan estrategias.">
-  <h3>3) ¿Qué se realiza en la fase de planificación?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q3" value="a"> Definir metas y elegir estrategias adecuadas.</label>
-    <label class="opt"><input type="radio" name="q3" value="b"> Implementar directamente lo planificado.</label>
-    <label class="opt"><input type="radio" name="q3" value="c"> Evaluar los resultados después de estudiar.</label>
-    <label class="opt"><input type="radio" name="q3" value="d"> Evitar organizar el tiempo disponible.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .intro {
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
-<!-- P4 -->
-<div class="q" data-correct="d" data-explain="Un diario de aprendizaje permite reflexionar sobre avances, errores y estrategias.">
-  <h3>4) ¿Qué estrategia fomenta la metacognición?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q4" value="a"> Estudiar sin reflexionar.</label>
-    <label class="opt"><input type="radio" name="q4" value="b"> Memorizar listados extensos.</label>
-    <label class="opt"><input type="radio" name="q4" value="c"> Seguir instrucciones sin adaptación.</label>
-    <label class="opt"><input type="radio" name="q4" value="d"> Usar un diario de aprendizaje para registrar avances.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .score-box {
+      position: sticky;
+      top: 12px;
+      background: #1e3a8a;
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 14px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(30, 58, 138, 0.2);
+      z-index: 10;
+    }
 
-<!-- P5 -->
-<div class="q" data-correct="b" data-explain="La metacognición ayuda a adaptarse a nuevas tecnologías y a resolver problemas autónomamente.">
-  <h3>5) ¿Por qué es esencial en la educación técnica profesional?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q5" value="a"> Porque permite memorizar códigos sin analizarlos.</label>
-    <label class="opt"><input type="radio" name="q5" value="b"> Porque facilita la adaptación continua a nuevas tecnologías.</label>
-    <label class="opt"><input type="radio" name="q5" value="c"> Porque evita la práctica autónoma.</label>
-    <label class="opt"><input type="radio" name="q5" value="d"> Porque elimina la necesidad de reflexionar.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .question {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
+    }
 
-<!-- P6 -->
-<div class="q" data-correct="c" data-explain="La autorregulación incluye supervisar y ajustar estrategias mientras se aprende.">
-  <h3>6) ¿Qué aspecto pertenece a la autorregulación del aprendizaje?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q6" value="a"> Repetir tareas de memoria sin análisis.</label>
-    <label class="opt"><input type="radio" name="q6" value="b"> Confiar solo en instrucciones externas.</label>
-    <label class="opt"><input type="radio" name="q6" value="c"> Monitorear el progreso y ajustar estrategias.</label>
-    <label class="opt"><input type="radio" name="q6" value="d"> Evitar establecer objetivos.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .question h2 {
+      margin-top: 0;
+      color: #0f172a;
+      font-size: 1.2rem;
+    }
 
-<!-- P7 -->
-<div class="q" data-correct="a" data-explain="La fase de evaluación consiste en valorar si las metas se cumplieron y cómo mejorar.">
-  <h3>7) ¿Qué se hace en la fase de evaluación de la autorregulación?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q7" value="a"> Analizar resultados y proponer mejoras.</label>
-    <label class="opt"><input type="radio" name="q7" value="b"> Evitar revisar errores.</label>
-    <label class="opt"><input type="radio" name="q7" value="c"> Iniciar el aprendizaje sin planear.</label>
-    <label class="opt"><input type="radio" name="q7" value="d"> Memorizar únicamente lo visto en clase.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .statement {
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
 
-<!-- P8 -->
-<div class="q" data-correct="d" data-explain="El conocimiento declarativo implica saber qué son las cosas (conceptos, definiciones).">
-  <h3>8) ¿Qué ejemplo representa conocimiento declarativo?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q8" value="a"> Saber cuándo aplicar una fórmula.</label>
-    <label class="opt"><input type="radio" name="q8" value="b"> Elegir estrategias según el contexto.</label>
-    <label class="opt"><input type="radio" name="q8" value="c"> Regular la concentración durante el estudio.</label>
-    <label class="opt"><input type="radio" name="q8" value="d"> Recordar la definición de un concepto.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
 
-<!-- P9 -->
-<div class="q" data-correct="c" data-explain="La motivación es un factor clave para la autorregulación, pues impulsa a mantener metas.">
-  <h3>9) ¿Cuál factor personal favorece la autorregulación?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q9" value="a"> Evitar reflexionar sobre errores.</label>
-    <label class="opt"><input type="radio" name="q9" value="b"> Seguir instrucciones sin cuestionar.</label>
-    <label class="opt"><input type="radio" name="q9" value="c"> Tener motivación y establecer objetivos.</label>
-    <label class="opt"><input type="radio" name="q9" value="d"> Rechazar nuevas estrategias.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .options,
+    .dropzone-area {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 220px;
+      border: 2px dashed #cbd5e1;
+    }
 
-<!-- P10 -->
-<div class="q" data-correct="a" data-explain="La metacognición se divide en conocimiento (saber sobre procesos cognitivos) y regulación (controlarlos).">
-  <h3>10) ¿Cuáles son los componentes principales de la metacognición?</h3>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q10" value="a"> Conocimiento y regulación.</label>
-    <label class="opt"><input type="radio" name="q10" value="b"> Memorización y repetición.</label>
-    <label class="opt"><input type="radio" name="q10" value="c"> Atención y esfuerzo físico.</label>
-    <label class="opt"><input type="radio" name="q10" value="d"> Ensayo y error sin reflexión.</label>
-  </div>
-  <div class="feedback"></div>
-</div>
+    .label {
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #334155;
+    }
 
-      <div class="actions">
-        <button type="button" id="grade">Calificar</button>
-        <button type="button" class="secondary" id="reset">Reiniciar</button>
-        <span id="score" class="score muted"></span>
-      </div>
-      <div class="legend">⚠️ <span class="required">Si alguna pregunta no tiene respuesta seleccionada, contará como incorrecta.</span></div>
-    </form>
-  </div>
-</div>
+    .option {
+      background: #dbeafe;
+      border: 1px solid #93c5fd;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: grab;
+      line-height: 1.5;
+      user-select: none;
+    }
 
-<script>
-(function(){
-  const quiz = document.getElementById('quiz');
-  const gradeBtn = document.getElementById('grade');
-  const resetBtn = document.getElementById('reset');
-  const scoreEl = document.getElementById('score');
+    .option:active {
+      cursor: grabbing;
+    }
 
-  function grade(){
-    const questions = quiz.querySelectorAll('.q');
-    let correct = 0;
-    questions.forEach((q, idx)=>{
-      const name = 'q' + (idx+1);
-      const sel = quiz.querySelector('input[name="'+name+'"]:checked');
-      const fb  = q.querySelector('.feedback');
-      const correctVal = q.getAttribute('data-correct');
-      const explain = q.getAttribute('data-explain') || '';
+    .dropzone {
+      background: #ffffff;
+      border: 2px dashed #94a3b8;
+      border-radius: 10px;
+      padding: 14px;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #64748b;
+      transition: 0.2s;
+    }
 
-      fb.classList.remove('ok','bad');
-      fb.style.display = 'block';
-      const oldMark = q.querySelector('.mark');
-      if(oldMark){ oldMark.remove(); }
+    .dropzone.over {
+      background: #eff6ff;
+      border-color: #2563eb;
+    }
 
-      if(sel && sel.value === correctVal){
-        correct++;
-        fb.classList.add('ok');
-        fb.textContent = '✅ ¡Correcto! ' + explain;
-        const chip = document.createElement('span');
-        chip.className = 'mark ok';
-        chip.textContent = '✓';
-        q.querySelector('h3').appendChild(chip);
-      }else{
-        fb.classList.add('bad');
-        fb.textContent = '❌ Incorrecto. ' + explain;
-        const chip = document.createElement('span');
-        chip.className = 'mark bad';
-        chip.textContent = '×';
-        q.querySelector('h3').appendChild(chip);
+    .dropzone.correct-filled,
+    .dropzone.incorrect-filled {
+      justify-content: flex-start;
+      text-align: left;
+      color: #1f2937;
+    }
+
+    .feedback {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 10px;
+      display: none;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .feedback.correct {
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      color: #166534;
+      display: block;
+    }
+
+    .feedback.incorrect {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      display: block;
+    }
+
+    .buttons {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    .check-btn {
+      background: #2563eb;
+      color: white;
+    }
+
+    .reset-btn {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .final-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 28px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
+      text-align: center;
+    }
+
+    .final-btn {
+      background: #0f766e;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    .result {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      display: none;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .result.show {
+      display: block;
+      background: #ecfeff;
+      border: 1px solid #99f6e4;
+      color: #134e4a;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: 1fr;
       }
-    });
-    scoreEl.textContent = 'Puntuación: ' + correct + ' / ' + questions.length + ' (' + Math.round(correct*100/questions.length) + '%)';
-  }
+    }
+  </style>
+</head>
 
-  function resetQuiz(){
-    quiz.reset();
-    scoreEl.textContent = '';
-    quiz.querySelectorAll('.feedback').forEach(fb=>{
-      fb.style.display = 'none';
-      fb.classList.remove('ok','bad');
-      fb.textContent = '';
-    });
-    quiz.querySelectorAll('.mark').forEach(m=>m.remove());
-  }
+<body>
+  <div class="container">
+    <h1>Evaluación Estrategias para la reflexión continua</h1>
+    <p class="intro">
+      <br>
+      Arrastra una opción hacia el espacio de respuesta de cada pregunta. Luego presiona <em>Verificar respuesta</em>
+      para recibir retroalimentación inmediata.
+    </p>
 
-  gradeBtn.addEventListener('click', grade);
-  resetBtn.addEventListener('click', resetQuiz);
-})();
-</script>
+    <div class="score-box">
+      Puntaje actual: <span id="score">0</span> / 5 respuestas correctas
+    </div>
+
+    <div class="question" data-question="1" data-correct="q1b">
+      <h2>Pregunta 1</h2>
+      <div class="statement">
+        Un estudiante finaliza una actividad y obtiene un resultado aceptable, pero no revisa el proceso que
+        utilizó.<br><br>
+        <strong>¿Qué debería hacer para aplicar reflexión continua?</strong>
+      </div>
+      <div class="layout">
+        <div class="options" id="options-q1">
+          <div class="label">Opciones</div>
+          <div class="option" draggable="true" id="q1a">A. Pasar a la siguiente actividad, considerando que el resultado
+            fue suficiente.</div>
+          <div class="option" draggable="true" id="q1b">B. Analizar el proceso seguido, identificar fortalezas y
+            aspectos a mejorar para futuras tareas.</div>
+          <div class="option" draggable="true" id="q1c">C. Repetir la actividad sin modificar su forma de trabajo.</div>
+        </div>
+        <div class="dropzone-area">
+          <div class="label">Respuesta</div>
+          <div class="dropzone" data-drop="1">Suelta aquí la respuesta correcta</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="check-btn" onclick="checkAnswer(1)">Verificar respuesta</button>
+        <button class="reset-btn" onclick="resetQuestion(1)">Reiniciar</button>
+      </div>
+      <div class="feedback" id="feedback-1"></div>
+    </div>
+
+    <div class="question" data-question="2" data-correct="q2b">
+      <h2>Pregunta 2</h2>
+      <div class="statement">
+        Durante el desarrollo de un proyecto, un estudiante identifica que no está logrando los resultados
+        esperados.<br><br>
+        <strong>¿Cómo debería actuar desde la reflexión continua?</strong>
+      </div>
+      <div class="layout">
+        <div class="options" id="options-q2">
+          <div class="label">Opciones</div>
+          <div class="option" draggable="true" id="q2a">A. Continuar con la misma estrategia hasta finalizar el
+            proyecto.</div>
+          <div class="option" draggable="true" id="q2b">B. Detenerse a analizar su proceso, identificar dificultades y
+            ajustar sus estrategias de trabajo.</div>
+          <div class="option" draggable="true" id="q2c">C. Abandonar la actividad y comenzar una nueva con otro enfoque.
+          </div>
+        </div>
+        <div class="dropzone-area">
+          <div class="label">Respuesta</div>
+          <div class="dropzone" data-drop="2">Suelta aquí la respuesta correcta</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="check-btn" onclick="checkAnswer(2)">Verificar respuesta</button>
+        <button class="reset-btn" onclick="resetQuestion(2)">Reiniciar</button>
+      </div>
+      <div class="feedback" id="feedback-2"></div>
+    </div>
+
+    <div class="question" data-question="3" data-correct="q3c">
+      <h2>Pregunta 3</h2>
+      <div class="statement">
+        Un estudiante revisa su desempeño después de una evaluación, pero solo se enfoca en la calificación
+        obtenida.<br><br>
+        <strong>¿Qué acción fortalecería la reflexión continua?</strong>
+      </div>
+      <div class="layout">
+        <div class="options" id="options-q3">
+          <div class="label">Opciones</div>
+          <div class="option" draggable="true" id="q3a">A. Analizar únicamente la nota para determinar si aprobó o no.
+          </div>
+          <div class="option" draggable="true" id="q3b">B. Comparar su calificación con la de otros estudiantes.</div>
+          <div class="option" draggable="true" id="q3c">C. Analizar los errores, comprender sus causas y definir
+            acciones de mejora.</div>
+        </div>
+        <div class="dropzone-area">
+          <div class="label">Respuesta</div>
+          <div class="dropzone" data-drop="3">Suelta aquí la respuesta correcta</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="check-btn" onclick="checkAnswer(3)">Verificar respuesta</button>
+        <button class="reset-btn" onclick="resetQuestion(3)">Reiniciar</button>
+      </div>
+      <div class="feedback" id="feedback-3"></div>
+    </div>
+
+    <div class="question" data-question="4" data-correct="q4b">
+      <h2>Pregunta 4</h2>
+      <div class="statement">
+        Un estudiante reconoce que sus estrategias de estudio no le están dando buenos resultados, pero no realiza
+        cambios.<br><br>
+        <strong>¿Qué debería hacer para mejorar su aprendizaje?</strong>
+      </div>
+      <div class="layout">
+        <div class="options" id="options-q4">
+          <div class="label">Opciones</div>
+          <div class="option" draggable="true" id="q4a">A. Mantener sus estrategias actuales para evitar confusión.
+          </div>
+          <div class="option" draggable="true" id="q4b">B. Analizar sus resultados, identificar fallas y probar nuevas
+            estrategias de aprendizaje.</div>
+          <div class="option" draggable="true" id="q4c">C. Incrementar el tiempo de estudio sin modificar la forma de
+            aprender.</div>
+        </div>
+        <div class="dropzone-area">
+          <div class="label">Respuesta</div>
+          <div class="dropzone" data-drop="4">Suelta aquí la respuesta correcta</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="check-btn" onclick="checkAnswer(4)">Verificar respuesta</button>
+        <button class="reset-btn" onclick="resetQuestion(4)">Reiniciar</button>
+      </div>
+      <div class="feedback" id="feedback-4"></div>
+    </div>
+
+    <div class="question" data-question="5" data-correct="q5b">
+      <h2>Pregunta 5</h2>
+      <div class="statement">
+        Al finalizar un trabajo en grupo, un estudiante reflexiona sobre su participación.<br><br>
+        <strong>¿Cuál de las siguientes acciones corresponde a una reflexión continua adecuada?</strong>
+      </div>
+      <div class="layout">
+        <div class="options" id="options-q5">
+          <div class="label">Opciones</div>
+          <div class="option" draggable="true" id="q5a">A. Considerar únicamente el resultado final del grupo.</div>
+          <div class="option" draggable="true" id="q5b">B. Evaluar su desempeño, identificar aprendizajes y definir
+            acciones para mejorar en futuras experiencias.</div>
+          <div class="option" draggable="true" id="q5c">C. Comparar su participación con la de otros integrantes del
+            grupo.</div>
+        </div>
+        <div class="dropzone-area">
+          <div class="label">Respuesta</div>
+          <div class="dropzone" data-drop="5">Suelta aquí la respuesta correcta</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="check-btn" onclick="checkAnswer(5)">Verificar respuesta</button>
+        <button class="reset-btn" onclick="resetQuestion(5)">Reiniciar</button>
+      </div>
+      <div class="feedback" id="feedback-5"></div>
+    </div>
+
+    <div class="final-box">
+      <h2>Resultado final</h2>
+      <p>Cuando hayas respondido todas las preguntas, presiona el botón para ver tu puntaje total.</p>
+      <button class="final-btn" onclick="showFinalResult()">Mostrar resultado final</button>
+      <div class="result" id="final-result"></div>
+    </div>
+  </div>
+
+  <script>
+    let draggedElement = null;
+
+    const feedbackTexts = {
+      1: {
+        correct: '¡Correcto! La reflexión continua implica revisar no solo el resultado, sino también el proceso seguido, para reconocer fortalezas y oportunidades de mejora.',
+        incorrect: 'Respuesta incorrecta. La reflexión continua exige analizar cómo se realizó la actividad. No basta con aceptar el resultado o repetir la tarea sin revisar el proceso.'
+      },
+      2: {
+        correct: '¡Correcto! Reflexionar continuamente significa detenerse, analizar las dificultades y ajustar estrategias para mejorar el desempeño durante el proceso.',
+        incorrect: 'Respuesta incorrecta. Mantener la misma estrategia sin revisar dificultades no favorece la mejora. La reflexión continua exige analizar el proceso y hacer ajustes pertinentes.'
+      },
+      3: {
+        correct: '¡Correcto! La reflexión continua se fortalece cuando el estudiante analiza sus errores, comprende por qué ocurrieron y define acciones concretas de mejora.',
+        incorrect: 'Respuesta incorrecta. Centrarse solo en la nota o compararse con otros no garantiza aprendizaje. Lo importante es comprender los errores y actuar para mejorar.'
+      },
+      4: {
+        correct: '¡Correcto! Reflexionar continuamente implica revisar resultados, identificar fallas y ensayar nuevas estrategias para mejorar el aprendizaje.',
+        incorrect: 'Respuesta incorrecta. Mantener la misma estrategia o solo aumentar el tiempo de estudio no siempre soluciona el problema. Es necesario revisar el proceso y hacer cambios de fondo.'
+      },
+      5: {
+        correct: '¡Correcto! En la reflexión continua, el estudiante evalúa su participación, reconoce aprendizajes y proyecta acciones de mejora para experiencias futuras.',
+        incorrect: 'Respuesta incorrecta. La reflexión continua no se limita al resultado grupal ni a la comparación con otros; exige analizar el propio desempeño para mejorar.'
+      }
+    };
+
+    function updateDraggables() {
+      document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('dragstart', (e) => {
+          draggedElement = option;
+          e.dataTransfer.setData('text/plain', option.id);
+        });
+      });
+    }
+
+    document.querySelectorAll('.dropzone').forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.classList.add('over');
+      });
+
+      zone.addEventListener('dragleave', () => {
+        zone.classList.remove('over');
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('over');
+
+        const droppedId = e.dataTransfer.getData('text/plain');
+        const element = document.getElementById(droppedId);
+        if (!element) return;
+
+        if (zone.querySelector('.option')) {
+          const existing = zone.querySelector('.option');
+          const qNumber = zone.getAttribute('data-drop');
+          document.getElementById(`options-q${qNumber}`).appendChild(existing);
+        }
+
+        zone.innerHTML = '';
+        zone.appendChild(element);
+      });
+    });
+
+    function checkAnswer(questionNumber) {
+      const question = document.querySelector(`.question[data-question="${questionNumber}"]`);
+      const correctId = question.dataset.correct;
+      const dropzone = question.querySelector('.dropzone');
+      const feedback = document.getElementById(`feedback-${questionNumber}`);
+      const selectedOption = dropzone.querySelector('.option');
+
+      feedback.className = 'feedback';
+      dropzone.classList.remove('correct-filled', 'incorrect-filled');
+
+      if (!selectedOption) {
+        feedback.textContent = 'Debes arrastrar una opción antes de verificar la respuesta.';
+        feedback.classList.add('incorrect');
+        updateScore();
+        return;
+      }
+
+      if (selectedOption.id === correctId) {
+        feedback.textContent = feedbackTexts[questionNumber].correct;
+        feedback.classList.add('correct');
+        dropzone.classList.add('correct-filled');
+      } else {
+        feedback.textContent = feedbackTexts[questionNumber].incorrect;
+        feedback.classList.add('incorrect');
+        dropzone.classList.add('incorrect-filled');
+      }
+
+      updateScore();
+    }
+
+    function resetQuestion(questionNumber) {
+      const question = document.querySelector(`.question[data-question="${questionNumber}"]`);
+      const dropzone = question.querySelector('.dropzone');
+      const feedback = document.getElementById(`feedback-${questionNumber}`);
+      const selectedOption = dropzone.querySelector('.option');
+
+      if (selectedOption) {
+        document.getElementById(`options-q${questionNumber}`).appendChild(selectedOption);
+      }
+
+      dropzone.innerHTML = 'Suelta aquí la respuesta correcta';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      dropzone.classList.remove('correct-filled', 'incorrect-filled');
+      updateScore();
+      hideFinalResult();
+    }
+
+    function updateScore() {
+      let score = 0;
+      document.querySelectorAll('.question').forEach(question => {
+        const correctId = question.dataset.correct;
+        const selected = question.querySelector('.dropzone .option');
+        if (selected && selected.id === correctId) {
+          score++;
+        }
+      });
+      document.getElementById('score').textContent = score;
+    }
+
+    function showFinalResult() {
+      const total = document.querySelectorAll('.question').length;
+      let answered = 0;
+      let score = 0;
+
+      document.querySelectorAll('.question').forEach(question => {
+        const correctId = question.dataset.correct;
+        const selected = question.querySelector('.dropzone .option');
+        if (selected) {
+          answered++;
+          if (selected.id === correctId) score++;
+        }
+      });
+
+      const resultBox = document.getElementById('final-result');
+      if (answered < total) {
+        resultBox.innerHTML = `Has respondido ${answered} de ${total} preguntas. Completa toda la evaluación para obtener el resultado final.`;
+      } else {
+        let message = '';
+        if (score === total) {
+          message = '¡Excelente! Has demostrado una comprensión muy sólida sobre las estrategias para la reflexión continua.';
+        } else if (score >= 4) {
+          message = 'Muy bien. Tienes un buen dominio del tema, aunque aún puedes fortalecer algunos aspectos.';
+        } else if (score >= 3) {
+          message = 'Buen intento. Comprendes parte del tema, pero es recomendable revisar algunos conceptos sobre reflexión continua.';
+        } else {
+          message = 'Necesitas reforzar el tema. Te conviene revisar cómo la reflexión continua ayuda a identificar errores, ajustar estrategias y mejorar el aprendizaje.';
+        }
+        resultBox.innerHTML = `Obtuviste <strong>${score} de ${total}</strong> respuestas correctas.<br>${message}`;
+      }
+      resultBox.classList.add('show');
+    }
+
+    function hideFinalResult() {
+      const resultBox = document.getElementById('final-result');
+      resultBox.classList.remove('show');
+      resultBox.innerHTML = '';
+    }
+
+    updateDraggables();
+  </script>
 </body>
+
 </html>
